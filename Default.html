@@ -9,7 +9,8 @@
     <script src="js/list.js"></script>
     <script src="js/Codepros.js"></script>
     <link href="Style.css" rel="stylesheet" />
-    <!-- Include meta tag to ensure proper rendering and touch zooming -->
+    <!-- Include meta tag to ensure prop
+    er rendering and touch zooming -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Include jQuery Mobile stylesheets -->
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
@@ -21,14 +22,22 @@
     <!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
 </head>
 <body>
-    
-        <div data-role="page" id="pageone">
+    <button type="button" id="btnLocation" data-inline="true" class="ui-btn ui-icon-Location ui-shadow ui-corner-all ui-btn-icon-notext ">get location</button>
+        <div data-role="page" id="default" >
             <!--hiden button-->
-            <button type="button" id="btnLocation" data-inline="true" class="ui-btn ui-icon-Location ui-shadow ui-corner-all ui-btn-icon-notext ">get location</button>
+            
 
             <!--left panel-->
-            <div data-role="panel" id="navpanel" data-display="overlay">
-                <button type="button" id="btnGetDirection">get direction</button>
+            <div data-role="panel" id="navpanel" data-display="overlay" data-theme="b">
+          
+<ul data-role="listview">
+    <li> <a href="#"id="btnGetDirection">Get Directions</a></li>
+
+    <li><a href="audi.html">Settings</a></li>
+    <li><a href="bmw.html">Help</a></li>
+    
+</ul>
+
                 <div data-role="main" class="ui-content">
                    
                 </div>
@@ -73,7 +82,8 @@
                         <button type="button" id="btnHintOk" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">ok</button>
                     </div>
                 </div>
-                <div data-role="popup" id="popupDialogGetDirectionMethod" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width: 300px">
+                
+                <div data-role="popup" id="popupDialogGetDirectionMethod" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width: 300px;">
                     <div data-role="header" data-theme="a">
                         <h5>3alymen</h5>
                     </div>
@@ -87,7 +97,26 @@
                 <div id="container">
                 </div>
             </div>
+
         </div>
+
+<div data-role="page" id="panel">
+  <div data-role="header">
+    <h1>Directions</h1>
+  </div>
+  <div data-role="main" class="ui-content">
+    <div id="directions">
+    </div>
+    <a href="#" class="ui-btn ui-btn-b" data-rel="back">Map</a>
+  </div>
+
+  <div data-role="footer">
+    
+  </div>
+</div> 
+
+        
+
     
     <script type="text/javascript" src="js/MapScript.js"></script>
     <script src="js/Script.js"></script>  

@@ -13,7 +13,7 @@
 #header {
     background-color:whitesmoke;
     color:gray;
-    height:54px;
+
 }
 #nav{
     list-style:none;
@@ -77,9 +77,3 @@
     margin-top: -11px;
     font-size: 11px;
 }
-.ui-panel-inner {
-     padding:0px;
- }
- .ui-controlgroup {
-     margin:0;
- }

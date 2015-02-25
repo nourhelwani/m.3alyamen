@@ -14,7 +14,14 @@
         myMap.MarkCurrentPosition();
     }
 
-    //add event 
+    //add events
+  /*  document.getElementById('btnPanelBack').onclick=function(){
+                             $.mobile.pageContainer.pagecontainer("change", "#default", {
+            transition: "flip"
+        });
+
+
+}*/
 
     document.getElementById('btnGetDirection').onclick = function () {
       popupDialogGetDirectionMethod();
@@ -65,16 +72,16 @@
             start: new google.maps.LatLng(marks.point1Lat, marks.point1Lng),
             end: new google.maps.LatLng(marks.point2Lat, marks.point2Lng),
             travelMode: travelModes,
-            panel: "test"
+            panel: "directions"
         });
     }
     //to drow first point1 and call drowPoont2() 
     function drowPoint1() {
-$("#popupDialogDireictionHint").popup("open")
+/*$("#popupDialogDireictionHint").popup("open")
         document.getElementById('btnHintOk').onclick = function () {
             //event to close popupDialogDireictionHint when press ok 
             $("#popupDialogDireictionHint").popup("close")
-        }
+        }*/
         //open popupDialogDireictionHint 
         
         //add event to map
@@ -128,7 +135,10 @@ $("#popupDialogDireictionHint").popup("open")
                 myMap._attachEvents(myMap.gMap, [{
                     name: 'click',
                     callback: function (e) {
-                        clear();
+           $.mobile.pageContainer.pagecontainer("change", "#panel", {
+            transition: "slideup"
+        });
+                       clear();
                         google.maps.event.clearListeners(myMap.gMap, 'click');
                     }
                 }]);
