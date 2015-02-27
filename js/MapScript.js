@@ -4,7 +4,6 @@
         zoom: 10,
         geocoder: true
     });
-    var marksLatLong = { point1Lat: "", point1Lng: "", point2Lat: "", point2Lng: "" }
     var mark1;
     var mark2;
  
@@ -27,13 +26,11 @@
     var btnGetDirectionMethodTwoPoint = document.getElementById('btnGetDirectionMethodTwoPoint');
     btnGetDirectionMethodTwoPoint.onclick = function () {
         $("#popupDialogGetDirectionMethod").popup("close")
-
         drowPoint1();
     }
     var btnGetDirectionMethodTwoSearchBox = document.getElementById('btnGetDirectionMethodTwoSearchBox');
     btnGetDirectionMethodTwoSearchBox.onclick = function () {
-        
-        $.mobile.pageContainer.pagecontainer("change", "#searchBox", {
+        $.mobile.pageContainer.pagecontainer("change", "#PageGetDirection", {
             transition: "slide"
         });
     }}
@@ -54,22 +51,14 @@
     }
     //call GetDirections in codepros
     function getDirection(travelModes) {
-    
-                      console.log(mark1.position.lat());
-                      console.log(mark1.position.lng());
-                      console.log(mark2.position.lat());
-                      console.log(mark2.position.lng());
-
         myMap.GetDirections({
-
             start: new google.maps.LatLng(mark1.position.lat(),mark1.position.lng()),
             end: new google.maps.LatLng(mark2.position.lat(), mark2.position.lng()),
             travelMode: travelModes,
             panel: "directions"
         });
-      myMap.clearMark(mark1);
+        myMap.clearMark(mark1);
         myMap.clearMark(mark2);
-         
     }
     //to drow first point1 and call drowPoont2() 
     function drowPoint1() {
@@ -114,7 +103,7 @@
 		obj:myMap.gMap,
 		event:'click',
 		callback:function (e){
-           $.mobile.pageContainer.pagecontainer("change", "#panel", {
+           $.mobile.pageContainer.pagecontainer("change", "#pagePanel", {
             transition: "slideup"
         });
                        clear();
@@ -126,7 +115,6 @@
 
 	);
     }
-
     function clear() {
         myMap.ClearRoutes();
     }
