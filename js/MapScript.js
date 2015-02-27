@@ -32,9 +32,12 @@
     }
     var btnGetDirectionMethodTwoSearchBox = document.getElementById('btnGetDirectionMethodTwoSearchBox');
     btnGetDirectionMethodTwoSearchBox.onclick = function () {
-        $("#popupDialogGetDirectionMethod").popup("close")
-    }
-}
+        
+        $.mobile.pageContainer.pagecontainer("change", "#searchBox", {
+            transition: "slide"
+        });
+    }}
+
     function openpoPupDialogDireictionMethod2Point() {
         //open the popupDialogDireictionMethod
         $("#popupDialogDireictionMethod2Point").popup("open")
