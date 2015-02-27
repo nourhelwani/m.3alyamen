@@ -1,11 +1,13 @@
 (function (window, Codepros) {
-
     var myMap = Codepros.CreateNew(document.getElementById("container"), {
         center: new google.maps.LatLng(33, 36),
         zoom: 10,
         geocoder: true
     });
-    var marks = { point1Lat: "", point1Lng: "", point2Lat: "", point2Lng: "" }
+    var marksLatLong = { point1Lat: "", point1Lng: "", point2Lat: "", point2Lng: "" }
+    var mark1;
+    var mark2;
+ 
     //get location btn and push to map
     var btnLocation = document.getElementById("btnLocation");
     myMap.PushControl(btnLocation, 'bottom_right');
@@ -13,23 +15,14 @@
     btnLocation.onclick = function () {
         myMap.MarkCurrentPosition();
     }
-
     //add events
-  /*  document.getElementById('btnPanelBack').onclick=function(){
-                             $.mobile.pageContainer.pagecontainer("change", "#default", {
-            transition: "flip"
-        });
-
-
-}*/
-
     document.getElementById('btnGetDirection').onclick = function () {
       popupDialogGetDirectionMethod();
-    
     }
-
+    document.getElementById('btnOk').onclick=function(){
+    	 $("#popupDialogDireictionError").popup("close")
+    }
     function popupDialogGetDirectionMethod() {
-     
     $("#popupDialogGetDirectionMethod").popup("open")
     var btnGetDirectionMethodTwoPoint = document.getElementById('btnGetDirectionMethodTwoPoint');
     btnGetDirectionMethodTwoPoint.onclick = function () {
@@ -40,7 +33,6 @@
     var btnGetDirectionMethodTwoSearchBox = document.getElementById('btnGetDirectionMethodTwoSearchBox');
     btnGetDirectionMethodTwoSearchBox.onclick = function () {
         $("#popupDialogGetDirectionMethod").popup("close")
-
     }
 }
     function openpoPupDialogDireictionMethod2Point() {
@@ -57,93 +49,79 @@
             getDirection('walking')
         }
     }
-
     //call GetDirections in codepros
     function getDirection(travelModes) {
-        var matches1 = myMap.RemoveBy(function (marker) {
-            return marker.id === 0;
-        });
-        var matches2 = myMap.RemoveBy(function (marker) {
-            return marker.id === -1;
-        });
+    
+                      console.log(mark1.position.lat());
+                      console.log(mark1.position.lng());
+                      console.log(mark2.position.lat());
+                      console.log(mark2.position.lng());
+
         myMap.GetDirections({
-            //start: new google.maps.LatLng(matches1[0].position.lat(), matches1[0].position.lng()),
-            //end: new google.maps.LatLng(matches2[0].position.lat(), matches2[0].position.lng()),
-            start: new google.maps.LatLng(marks.point1Lat, marks.point1Lng),
-            end: new google.maps.LatLng(marks.point2Lat, marks.point2Lng),
+
+            start: new google.maps.LatLng(mark1.position.lat(),mark1.position.lng()),
+            end: new google.maps.LatLng(mark2.position.lat(), mark2.position.lng()),
             travelMode: travelModes,
             panel: "directions"
         });
+      myMap.clearMark(mark1);
+        myMap.clearMark(mark2);
+         
     }
     //to drow first point1 and call drowPoont2() 
     function drowPoint1() {
-/*$("#popupDialogDireictionHint").popup("open")
-        document.getElementById('btnHintOk').onclick = function () {
-            //event to close popupDialogDireictionHint when press ok 
-            $("#popupDialogDireictionHint").popup("close")
-        }*/
         //open popupDialogDireictionHint 
-        
         //add event to map
-        myMap._attachEvents(myMap.gMap, [{
-            name: 'click',
-            //create mark
-            callback: function (e) {
-                marks.point1Lat = e.latLng.lat();
-                marks.point1Lng = e.latLng.lng();
-                var marker1 = myMap.CreateMarker({
-                    lat: e.latLng.lat(),
-                    lng: e.latLng.lng(),
-                    id: 0,
-                    content: "first place",
-                    draggable: true,
-                    events: [{
-                        name: 'dragend',
-                        callback: function (e) {
-
-                        }
-                    }]
-                });
-                // clear event after click
-                google.maps.event.clearListeners(myMap.gMap, 'click');
+        myMap._OnOnce({
+		obj:myMap.gMap,
+		event:'click',
+		
+			callback: function (e) {
+                //marksLatLong.point1Lat = e.latLng.lat();
+                //marksLatLong.point1Lng = e.latLng.lng();
+                 mark1 = new google.maps.Marker({
+                        position:{
+                            lat: e.latLng.lat(),
+                            lng:e.latLng.lng(),
+                        },
+                        map:this.gMap
+                    })
                 //call drowPoint2()
                 drowPoint2();
+                
             }
-        }]);
-    }
+		})}
+
     function drowPoint2() {
-        myMap._attachEvents(myMap.gMap, [{
-            name: 'click',
-            callback: function (e) {
-                marks.point2Lat = e.latLng.lat();
-                marks.point2Lng = e.latLng.lng();
-                var marker2 = myMap.CreateMarker({
-                    lat: e.latLng.lat(),
-                    lng: e.latLng.lng(),
-                    id: -1,
-                    content: "second place",
-                    draggable: true,
-                    events: [{
-                        name: 'dragend',
-                        callback: function (e) {
-                            //remove marks when drag it 
-                        }
-                    }]
-                });
-                google.maps.event.clearListeners(myMap.gMap, 'click');
-                openpoPupDialogDireictionMethod2Point();
-                myMap._attachEvents(myMap.gMap, [{
-                    name: 'click',
-                    callback: function (e) {
+    	myMap._OnOnce({
+		obj:myMap.gMap,
+		event:'click',
+		callback:function (e){
+			 //marksLatLong.point2Lat = e.latLng.lat();
+               // marksLatLong.point2Lng = e.latLng.lng();
+                 mark2 = new google.maps.Marker({
+                        position:{
+                            lat: e.latLng.lat(),
+                            lng:e.latLng.lng(),
+                        },
+                        map:this.gMap
+                    })
+                 openpoPupDialogDireictionMethod2Point();
+               myMap._OnOnce({
+		obj:myMap.gMap,
+		event:'click',
+		callback:function (e){
            $.mobile.pageContainer.pagecontainer("change", "#panel", {
             transition: "slideup"
         });
                        clear();
-                        google.maps.event.clearListeners(myMap.gMap, 'click');
+                        //google.maps.event.clearListeners(myMap.gMap, 'click');
                     }
-                }]);
-            }
-        }]);
+                });
+		}
+	}
+
+	);
     }
 
     function clear() {

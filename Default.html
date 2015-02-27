@@ -4,10 +4,13 @@
     <meta charset="UTF-8" />
     <title>MyMap</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+   <script src="js/jquery1.10.2.js"></script>
+    <script src="js/jqueryui1.11.3.js"></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=false&libraries=places,geometry"></script>
     <script src="js/MarkerClusterer.js"></script>
     <script src="js/list.js"></script>
     <script src="js/Codepros.js"></script>
+    <script src="js/jqueryui.codepros.js"></script>
     <link href="Style.css" rel="stylesheet" />
     <!-- Include meta tag to ensure prop
     er rendering and touch zooming -->
@@ -61,6 +64,7 @@
                 </div>
             </div>
             <div data-role="content" style="padding: 0;">
+            
                 <div data-role="popup" id="popupDialogDireictionMethod2Point" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width: 250px;">
                     <div data-role="header" data-theme="a">
                         <h5>3alymen</h5>
@@ -73,16 +77,17 @@
                     </div>
                 </div>
 
-                <div data-role="popup" id="popupDialogDireictionHint" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width: 250px;">
+                <div data-role="popup" id="popupDialogDireictionError" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width: 250px;">
                     <div data-role="header" data-theme="a">
                         <h5>3alymen</h5>
                     </div>
+
                     <div role="main" class="ui-content">
-                        <p>please Drow two point on the map to get direction</p>
-                        <button type="button" id="btnHintOk" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">ok</button>
+                        <p>Directions not available.</p>
+                        <button type="button" id="btnOk" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" >ok</button>
                     </div>
                 </div>
-                
+
                 <div data-role="popup" id="popupDialogGetDirectionMethod" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width: 300px;">
                     <div data-role="header" data-theme="a">
                         <h5>3alymen</h5>
@@ -90,8 +95,10 @@
                     <div role="main" class="ui-content">
 
                         <p>please choose the direction method</p>
-                        <button type="button" id="btnGetDirectionMethodTwoPoint" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">2 Points</button>
-                        <button type="button" id="btnGetDirectionMethodTwoSearchBox" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Search box</button>
+                        <button type="button" id="btnGetDirectionMethodTwoPoint" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" >2 Points</button>
+                        <button type="button" id="btnGetDirectionMethodTwoSearchBox" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">Search box
+                        </button>
+                        
                     </div>
                 </div>
                 <div id="container">
