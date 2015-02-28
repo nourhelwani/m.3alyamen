@@ -1,9 +1,37 @@
 (function (window, Codepros) {
-    var myMap = Codepros.CreateNew(document.getElementById("container"), {
-        center: new google.maps.LatLng(33, 36),
-        zoom: 10,
-        geocoder: true
+   var myMap = Codepros.CreateNew(document.getElementById("container"),{
+        center: new google.maps.LatLng(33.51849923765608,36.287841796875),
+        zoom:13,
+        geocoder:true,
+        styles:[{
+            featureType:'poi',
+            elementtype:'labels',
+            stylers:[
+            {   visibility:'off'    }
+            ]
+        }]
     });
+ //search
+    var input = document.getElementById("text-field");
+    //myMap.PushControl(input,'top');
+    myMap.AutoComplete(input);
+    myMap._AttachEvents(myMap.gMap,[{
+            name:'click',
+            callback:function(e){
+                console.log(e.latLng.lat());
+                console.log(e.latLng.lng());
+                //alert("clicked");
+            }
+        }]);
+    var marks = { point1Lat: "", point1Lng: "", point2Lat: "", point2Lng: "" }
+    //get location btn and push to map
+    var btnLocation = document.getElementById("btnLocation");
+    myMap.PushControl(btnLocation, 'bottom_right');
+    //event
+    btnLocation.onclick = function () {
+        myMap.MarkCurrentPosition();
+    }
+//
     var mark1;
     var mark2;
  
