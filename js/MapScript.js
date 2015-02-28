@@ -50,7 +50,7 @@
         }
     }
     //call GetDirections in codepros
-   var error= function getDirection(travelModes) {
+    function getDirection(travelModes) {
         myMap.GetDirections({
             start: new google.maps.LatLng(mark1.position.lat(),mark1.position.lng()),
             end: new google.maps.LatLng(mark2.position.lat(), mark2.position.lng()),
@@ -59,7 +59,6 @@
         });
         myMap.clearMark(mark1);
         myMap.clearMark(mark2);
-        console.log(error);
     }
     //to drow first point1 and call drowPoont2() 
     function drowPoint1() {
