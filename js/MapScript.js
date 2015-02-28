@@ -23,7 +23,7 @@
                 //alert("clicked");
             }
         }]);
-    var marks = { point1Lat: "", point1Lng: "", point2Lat: "", point2Lng: "" }
+   
     //get location btn and push to map
     var btnLocation = document.getElementById("btnLocation");
     myMap.PushControl(btnLocation, 'bottom_right');
