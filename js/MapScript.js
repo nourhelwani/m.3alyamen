@@ -1,4 +1,6 @@
 (function (window, Codepros) {
+    var h = window.innerHeight-42;
+    document.getElementById('container').style.height=h;
     var myMap = Codepros.CreateNew(document.getElementById("container"), {
         center: new google.maps.LatLng(33.51849923765608, 36.287841796875),
         zoom: 13,

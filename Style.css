@@ -1,12 +1,14 @@
-﻿head,body{
+﻿    #container{
+           
+            margin: 0px ;
+            padding: 0px ;   
+
+}
+head,body{
     padding: 0px;
     margin: 0px;
 }
-#container{
-            height:1000px;
-            margin: 0px ;
-            padding: 0px ;
-}
+ 
 #navpanel{
    width:70%;
 }
