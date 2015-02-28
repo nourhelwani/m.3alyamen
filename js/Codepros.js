@@ -232,8 +232,9 @@
                 directionsService.route(request,function(response,status){
                     if(status == google.maps.DirectionsStatus.OK){
                         self.directionsDisplay.setDirections(response);
+                        directionOption.success.call(this,true);
                     } else {
-                        alert("not OK");
+                        directionOption.error.call(this,false);
                     }
                 });
             },

@@ -1,29 +1,29 @@
 (function (window, Codepros) {
-   var myMap = Codepros.CreateNew(document.getElementById("container"),{
-        center: new google.maps.LatLng(33.51849923765608,36.287841796875),
-        zoom:13,
-        geocoder:true,
-        styles:[{
-            featureType:'poi',
-            elementtype:'labels',
-            stylers:[
-            {   visibility:'off'    }
+    var myMap = Codepros.CreateNew(document.getElementById("container"), {
+        center: new google.maps.LatLng(33.51849923765608, 36.287841796875),
+        zoom: 13,
+        geocoder: true,
+        styles: [{
+            featureType: 'poi',
+            elementtype: 'labels',
+            stylers: [
+            { visibility: 'off' }
             ]
         }]
     });
- //search
+    //search
     var input = document.getElementById("text-field");
     //myMap.PushControl(input,'top');
     myMap.AutoComplete(input);
-    myMap._AttachEvents(myMap.gMap,[{
-            name:'click',
-            callback:function(e){
-                console.log(e.latLng.lat());
-                console.log(e.latLng.lng());
-                //alert("clicked");
-            }
-        }]);
-   
+    myMap._AttachEvents(myMap.gMap, [{
+        name: 'click',
+        callback: function (e) {
+            console.log(e.latLng.lat());
+            console.log(e.latLng.lng());
+            //alert("clicked");
+        }
+    }]);
+
     //get location btn and push to map
     var btnLocation = document.getElementById("btnLocation");
     myMap.PushControl(btnLocation, 'bottom_right');
@@ -31,10 +31,10 @@
     btnLocation.onclick = function () {
         myMap.MarkCurrentPosition();
     }
-//
+    //
     var mark1;
     var mark2;
- 
+
     //get location btn and push to map
     var btnLocation = document.getElementById("btnLocation");
     myMap.PushControl(btnLocation, 'bottom_right');
@@ -44,24 +44,25 @@
     }
     //add events
     document.getElementById('btnGetDirection').onclick = function () {
-      popupDialogGetDirectionMethod();
+        popupDialogGetDirectionMethod();
     }
-    document.getElementById('btnOk').onclick=function(){
-    	 $("#popupDialogDireictionError").popup("close")
+    document.getElementById('btnOk').onclick = function () {
+        $("#popupDialogDireictionError").popup("close")
     }
     function popupDialogGetDirectionMethod() {
-    $("#popupDialogGetDirectionMethod").popup("open")
-    var btnGetDirectionMethodTwoPoint = document.getElementById('btnGetDirectionMethodTwoPoint');
-    btnGetDirectionMethodTwoPoint.onclick = function () {
-        $("#popupDialogGetDirectionMethod").popup("close")
-        drowPoint1();
+        $("#popupDialogGetDirectionMethod").popup("open")
+        var btnGetDirectionMethodTwoPoint = document.getElementById('btnGetDirectionMethodTwoPoint');
+        btnGetDirectionMethodTwoPoint.onclick = function () {
+            $("#popupDialogGetDirectionMethod").popup("close")
+            drowPoint1();
+        }
+        var btnGetDirectionMethodTwoSearchBox = document.getElementById('btnGetDirectionMethodTwoSearchBox');
+        btnGetDirectionMethodTwoSearchBox.onclick = function () {
+            $.mobile.pageContainer.pagecontainer("change", "#PageGetDirection", {
+                transition: "slide"
+            });
+        }
     }
-    var btnGetDirectionMethodTwoSearchBox = document.getElementById('btnGetDirectionMethodTwoSearchBox');
-    btnGetDirectionMethodTwoSearchBox.onclick = function () {
-        $.mobile.pageContainer.pagecontainer("change", "#PageGetDirection", {
-            transition: "slide"
-        });
-    }}
 
     function openpoPupDialogDireictionMethod2Point() {
         //open the popupDialogDireictionMethod
@@ -77,69 +78,81 @@
             getDirection('walking')
         }
     }
+    var getDirectionError = true;
     //call GetDirections in codepros
     function getDirection(travelModes) {
         myMap.GetDirections({
-            start: new google.maps.LatLng(mark1.position.lat(),mark1.position.lng()),
+            start: new google.maps.LatLng(mark1.position.lat(), mark1.position.lng()),
             end: new google.maps.LatLng(mark2.position.lat(), mark2.position.lng()),
             travelMode: travelModes,
-            panel: "directions"
+            panel: "directions",
+            error: function () {
+                $("#popupDialogDireictionError").popup("open")
+                clear();
+
+            }
+        ,
+            success: function () {
+                myMap._OnOnce({
+                    obj: myMap.gMap,
+                    event: 'click',
+                    callback: function (e) {
+                        $.mobile.pageContainer.pagecontainer("change", "#pagePanel", {
+                            transition: "slideup"
+                        });
+                        clear();
+                    }
+                });
+
+            }
         });
         myMap.clearMark(mark1);
         myMap.clearMark(mark2);
+
     }
     //to drow first point1 and call drowPoont2() 
     function drowPoint1() {
         //open popupDialogDireictionHint 
         //add event to map
         myMap._OnOnce({
-		obj:myMap.gMap,
-		event:'click',
-		
-			callback: function (e) {
+            obj: myMap.gMap,
+            event: 'click',
+
+            callback: function (e) {
                 //marksLatLong.point1Lat = e.latLng.lat();
                 //marksLatLong.point1Lng = e.latLng.lng();
-                 mark1 = new google.maps.Marker({
-                        position:{
-                            lat: e.latLng.lat(),
-                            lng:e.latLng.lng(),
-                        },
-                        map:this.gMap
-                    })
+                mark1 = new google.maps.Marker({
+                    position: {
+                        lat: e.latLng.lat(),
+                        lng: e.latLng.lng(),
+                    },
+                    map: this.gMap
+                })
                 //call drowPoint2()
                 drowPoint2();
-                
+
             }
-		})}
+        })
+    }
 
     function drowPoint2() {
-    	myMap._OnOnce({
-		obj:myMap.gMap,
-		event:'click',
-		callback:function (e){
-			 //marksLatLong.point2Lat = e.latLng.lat();
-               // marksLatLong.point2Lng = e.latLng.lng();
-                 mark2 = new google.maps.Marker({
-                        position:{
-                            lat: e.latLng.lat(),
-                            lng:e.latLng.lng(),
-                        },
-                        map:this.gMap
-                    })
-                 openpoPupDialogDireictionMethod2Point();
-               myMap._OnOnce({
-		obj:myMap.gMap,
-		event:'click',
-		callback:function (e){
-           $.mobile.pageContainer.pagecontainer("change", "#pagePanel", {
-            transition: "slideup"
-        });
-                       clear();
-                        //google.maps.event.clearListeners(myMap.gMap, 'click');
-                    }
-                });
-		}
-	}
+        myMap._OnOnce({
+            obj: myMap.gMap,
+            event: 'click',
+            callback: function (e) {
+                //marksLatLong.point2Lat = e.latLng.lat();
+                // marksLatLong.point2Lng = e.latLng.lng();
+                mark2 = new google.maps.Marker({
+                    position: {
+                        lat: e.latLng.lat(),
+                        lng: e.latLng.lng(),
+                    },
+                    map: this.gMap
+                })
+                openpoPupDialogDireictionMethod2Point();
+
+            }
+        }
 
 	);
     }

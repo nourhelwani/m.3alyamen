@@ -132,20 +132,28 @@ PageGetDirection
             <a href="#" class="ui-btn ui-btn-inline ui-icon-back ui-shadow ui-corner-all ui-btn-icon-notext" data-rel="back">Map</a>
         </div>
         <div data-role="main" class="ui-content">
-
-            <label for="name">Choose starting point</label>
-            <button type="button" id="btnLocation" data-inline="true" class="ui-btn ui-btn-inline ui-icon-Location ui-shadow ui-corner-all ui-btn-icon-notext "></button>
-
-            <input type="text" name="name" id="name" value="" />
+         <label for="name">Choose starting point</label>
+           
+     <div class="ui-grid-a">
+          <div class="ui-block-a">
+            <input type="text" name="name" id="name" value="" placeholder="Enter a Location" />   
+          </div>
+          <div class="ui-block-b">
+            
+              <button type="button" id="btnLocation"  class="ui-btn ui-btn-inline ui-icon-Location ui-shadow ui-corner-all ui-btn-icon-notext "></button>
+          </div>
+    </div>
+            
             <label for="name">Choose destinatio point</label>
 
-            <input type="text" name="name" id="name" value="" />
+            <input type="text" name="name" id="name" value="" placeholder="Enter a Location"/>
+
             <button type="button" id="btnSearchBoxGetDirection" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">
                 Get Direction
             </button>
         </div>
 
-    </div>
+    
     <script type="text/javascript" src="js/MapScript.js"></script>
     <script src="js/Script.js"></script>
 </body>
