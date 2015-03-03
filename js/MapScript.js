@@ -1,7 +1,8 @@
 (function (window, Codepros) {
-    var h = window.innerHeight-42;
-    document.getElementById('container').style.height=h;
-    var myMap = Codepros.CreateNew(document.getElementById("container"), {
+	
+
+
+ var myMap = Codepros.CreateNew(document.getElementById("container"), {
         center: new google.maps.LatLng(33.51849923765608, 36.287841796875),
         zoom: 13,
         geocoder: true,
@@ -13,6 +14,8 @@
             ]
         }]
     });
+ 	 
+//console.log($('#container').css( "height")); 
     //search
     var input = document.getElementById("text-field");
     //myMap.PushControl(input,'top');
@@ -20,9 +23,7 @@
     myMap._AttachEvents(myMap.gMap, [{
         name: 'click',
         callback: function (e) {
-            console.log(e.latLng.lat());
-            console.log(e.latLng.lng());
-            //alert("clicked");
+           
         }
     }]);
 
@@ -30,23 +31,24 @@
     var btnLocation = document.getElementById("btnLocation");
     myMap.PushControl(btnLocation, 'bottom_right');
     //event
-    btnLocation.onclick = function () {
-        myMap.MarkCurrentPosition();
-    }
     //
     var mark1;
     var mark2;
-
+ 
     //get location btn and push to map
     var btnLocation = document.getElementById("btnLocation");
     myMap.PushControl(btnLocation, 'bottom_right');
     //event
     btnLocation.onclick = function () {
+    	//alert(window.innerHeight);
         myMap.MarkCurrentPosition();
+
     }
     //add events
     document.getElementById('btnGetDirection').onclick = function () {
-        popupDialogGetDirectionMethod();
+   popupDialogGetDirectionMethod();
+        
+
     }
     document.getElementById('btnOk').onclick = function () {
         $("#popupDialogDireictionError").popup("close")
@@ -67,6 +69,7 @@
     }
 
     function openpoPupDialogDireictionMethod2Point() {
+    
         //open the popupDialogDireictionMethod
         $("#popupDialogDireictionMethod2Point").popup("open")
         //add event
