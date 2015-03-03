@@ -1,4 +1,6 @@
-﻿//notification nav bar
+//notification nav bar
+
+    
 $(document).ready(function () {
     $("#notificationLink").click(function () {
         $("#notificationContainer").fadeToggle(300);
