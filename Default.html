@@ -144,30 +144,50 @@ panle page
 PageGetDirection 
 -->
     <div data-role="page" id="PageGetDirection">
+     <div data-role="popup" id="popupDialogDireictionErrorSearchBox" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width: 250px;">
+                <div data-role="header" data-theme="a">
+                    <h5>3alymen</h5>
+                </div>
+
+                <div role="main" class="ui-content">
+                    <p>Directions not available.</p>
+                    <button type="button" id="btnOkSearchBox" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">ok</button>
+                </div>
+            </div>
         <div data-role="header">
             <h1>Directions</h1>
             <a href="#" class="ui-btn ui-btn-inline ui-icon-back ui-shadow ui-corner-all ui-btn-icon-notext" data-rel="back">Map</a>
         </div>
         <div data-role="main" class="ui-content">
-         <label for="name">Choose starting point</label>
-           
-     <div class="ui-grid-a">
-          <div class="ui-block-a">
-            <input type="text" name="name" id="name" value="" placeholder="Enter a Location" />   
-          </div>
-          <div class="ui-block-b">
-            
-              <button type="button" id="btnLocation"  class="ui-btn ui-btn-inline ui-icon-Location ui-shadow ui-corner-all ui-btn-icon-notext "></button>
-          </div>
-    </div>
-            
+<form>
+              
+        
+      
+               
+       
+      
+     
+          <button type="button" id="btnLocation"  class="ui-btn ui-btn-inline ui-icon-Location ui-shadow ui-corner-all ui-btn-icon-notext"></button>
+     <label for="name">Choose starting point</label>
+     <input type="text" name="name" id="searchBox1" value="" placeholder="Enter a Location" />
+          
             <label for="name">Choose destinatio point</label>
 
-            <input type="text" name="name" id="name" value="" placeholder="Enter a Location"/>
-
-            <button type="button" id="btnSearchBoxGetDirection" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">
+            <input type="text" name="name" id="searchBox2" value="" placeholder="Enter a Location"/>
+            </form>
+ <fieldset data-role="controlgroup" data-type="horizontal">
+        <legend>Directions way</legend>
+        <input type="radio" name="radio-choice-h-2" id="radCar" value="on" checked="checked">
+        <label for="radio-choice-h-2a">Car</label>
+        <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
+        <label for="radio-choice-h-2b">Walk</label>
+        <button type="button" id="radWalk" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">
                 Get Direction
             </button>
+    
+        
+    </fieldset>
+            
         </div>
 
  <link rel="stylesheet" type="text/css" href="style.css">

@@ -284,9 +284,9 @@
                     });
                 })
             },
-            AutoComplete:function( element ){
+            AutoComplete:function( options ){
                 var self = this;
-                var autoComplete = new google.maps.places.Autocomplete(element,{
+                var autoComplete = new google.maps.places.Autocomplete(options.element,{
                     componentRestrictions: {country: 'sy'}
                 });
                 autoComplete.bindTo('bounds',this.gMap);
@@ -323,6 +323,7 @@
                         }));
 
                         marker.setPosition(place.geometry.location);
+                        options.position.call(self,place.geometry.location)
                         marker.setVisible(true);
 
                         console.dir(place);
