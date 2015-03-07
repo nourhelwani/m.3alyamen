@@ -46,6 +46,16 @@ element:input
 
     	}
     });
+    document.getElementById('btnClosePanel').onclick=function(){
+ 
+google.maps.event.clearListeners(myMap.gMap, 'click');
+        $("#popupPanel").popup("close");
+    }
+    document.getElementById('btnMinimizePanel').onclick=function(){
+        $("#popupPanel").popup("close");
+
+    }
+    
     myMap._AttachEvents(myMap.gMap, [{
         name: 'click',
         callback: function (e) {
@@ -108,31 +118,28 @@ getDirection('walking',markerBox1,markerBox2);
 
 }
 catch(error){
-    errorGetDirections=true;
-
-    
+    errorGetDirections=true;    
 }
+
 
 if (errorGetDirections==false) {
  $.mobile.pageContainer.pagecontainer("change", "#pageMain", {
                 transition: "slide"
             });}
  else{
-
 $("#popupDialogDireictionErrorSearchBox").popup("open");
  }
  
-
-
-
     }
         
     document.getElementById('btn2point').onclick = function () {
+        clear();
         $( "#navpanel" ).panel( "close");
        drowPoint1()
     }
      var btnGetDirectionMethodTwoSearchBox = document.getElementById('btnGetDirectionMethodTwoSearchBox');
         btnGetDirectionMethodTwoSearchBox.onclick = function () {
+             clear();
             $.mobile.pageContainer.pagecontainer("change", "#PageGetDirection", {
 
             });
@@ -147,9 +154,6 @@ $("#popupDialogDireictionErrorSearchBox").popup("open");
 
         $("#popupDialogDireictionErrorSearchBox").popup("close")
     }
-    
-    
-
     function openpoPupDialogDireictionMethod2Point() {
     
         //open the popupDialogDireictionMethod
@@ -184,10 +188,7 @@ $("#popupDialogDireictionErrorSearchBox").popup("open");
             }
         ,
             success: function () {
-                myMap._OnOnce({
-                    obj: myMap.gMap,
-                    event: 'click',
-                    callback: function (e) {
+                
                     /*    $.mobile.pageContainer.pagecontainer("change", "#pagePanel", {
                             transition: "slideup"
                         });*/
@@ -196,24 +197,25 @@ $("#popupDialogDireictionErrorSearchBox").popup("open");
     y: 0
 })
 
-  myMap._OnOnce({
+                     myMap._On({
                     obj: myMap.gMap,
                     event: 'click',
                     callback: function (e) {
-                        clear();
+         $("#popupPanel").popup("open",{
+    x: 0,
+    y: 0
+})   
                    }})
 
                     }
                 });
 
             }
-        });
-        
-
-    }
+    
     //to drow first point1 and call drowPoont2() 
     function drowPoint1() {
-        //open popupDialogDireictionHint 
+        //intilize
+        google.maps.event.clearListeners(myMap.gMap, 'click')
         //add event to map
         myMap._OnOnce({
             obj: myMap.gMap,

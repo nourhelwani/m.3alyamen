@@ -99,10 +99,18 @@ PageMain
                     <button type="button" id="btnOk" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">ok</button>
                 </div>
             </div>
-            <div data-role="popup" id="popupPanel" data-overlay-theme="b" data-theme="a"  class="ui-content">
- <div id="directions" style="width:250px">
- </div>
+
+            <div data-role="popup" id="popupPanel" data-overlay-theme="b" data-theme="a"  data-dismissible="false" class="ui-content">
+            
+                       <fieldset data-role="controlgroup" data-theme="a" data-type="horizontal">
+                 <button type="button" id="btnClosePanel" data-mini="true">close</button>
+                         <button type="button" id="btnMinimizePanel"data-mini="true">minus</button>
+                </fieldset>
+                <div role="main" class="ui-content">
+                <div id="directions" style="width:250px">
+               </div>
     
+    </div>
  
 </div>
 
@@ -128,19 +136,6 @@ PageMain
     <!--
 panle page 
 -->
-    <div data-role="page" id="pagePanel">
-        <div data-role="header">
-            <h1>Directions</h1>
-        </div>
-        <div data-role="main" class="ui-content">
-            <div >
-            </div>
-            <a href="#" class="ui-btn ui-btn-b" data-rel="back">Map</a>
-        </div>
-        <div data-role="footer">
-        </div>
-    </div>
-    <!--
 PageGetDirection 
 -->
     <div data-role="page" id="PageGetDirection">
