@@ -8,108 +8,6 @@ html, body, #container {
 #container {
     position: relative;
 }
- 
-#header {
-    background-color:whitesmoke;
-    color:gray;
-    height: 40px;
-
-}
-#nav{
-    list-style:none;
-    margin: 0px;
-    padding:0px;
-    float: right;
-}
-#notificationContainer {
-    background-color: #fff;
-    border: 1px solid rgba(10.0, 100, 100, .4);
-    -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
-    overflow: visible;
-    position: absolute;
-    top: 40px;
-    margin-left:-70%;
-    width:70%;
-    z-index: 1;
-    display: none;
-}
-#notificationCo {
-    background-color:whitesmoke ;
-    border: 1px solid rgba(10.0, 100, 100, .4);
-    -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
-    overflow: visible;
-    position: absolute;
-    top: 40px;
-    margin-left:-100%;
-    width:100%;
-    height:50px;
-    z-index: 1;
-    display: none;
-     opacity: 0.9;
-    filter: alpha(opacity=90);
-}
-#notificationContainer:before {
-    content: '';
-    display: block;
-    position: absolute;
-    width: 0;
-    height: 0;
-    color: transparent;
-    border: 10px solid black;
-    border-color: transparent transparent white;
-    margin-top: -20px;
-    margin-left: 288px;
-}
-#notificationCo:before {
-    content: '';
-    display: block;
-    position: absolute;
-    width: 0;
-    height: 0;
-    color: transparent;
-    border: 10px solid black;
-    border-color: transparent transparent white;
-    margin-top: -20px;
-    margin-left: 288px;
-}
-#notificationTitle {
-    z-index: 1000;
-    font-weight: bold;
-    padding: 8px;
-    font-size: 13px;
-    background-color:whitesmoke;
-    
-    border-bottom: 1px solid #dddddd;
-}
-#notificationsBody {
-    padding: 0px 0px 0px 0px !important;
-    min-height:300px;
-}
-#notificationsBod {
-    padding: 25px 0px 0px 0px !important;
-    min-height:80px;
-    background-color: whitesmoke;
-
-}
-#notificationFooter {
-    background-color: #e9eaed;
-    text-align: center;
-    font-weight: bold;
-    padding: 8px;
-    font-size: 12px;
-    border-top: 1px solid #dddddd;
-}
-#notification_count {
-    padding: 3px 7px 3px 7px;
-    background: #cc0000;
-    color: #ffffff;
-    font-weight: bold;
-    margin-left: 77px;
-    border-radius: 9px;
-    position: absolute;
-    margin-top: -11px;
-    font-size: 11px;
-}
 #text-field{
     background-color: #fff;
     margin-right: 100px;
@@ -120,7 +18,14 @@ html, body, #container {
     text-overflow:ellipsis;
     height: 20px;
 }
-
+#pan{
+    width: 90%;
+    height: 45px;
+    margin-top: 8px;
+    border-radius: 15px;
+     opacity: 0.9;
+    filter: alpha(opacity=9);
+}
 .ui-li-static.ui-collapsible {
     padding: 0;
 }

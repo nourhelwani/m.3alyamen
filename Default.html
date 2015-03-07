@@ -48,29 +48,6 @@ PageMain
 </ul>
 </div>
 
-
-        <div data-role="header" id="header" data-position="fixed" data-fullscreen="true">
-               <h1>3alymen</h1>
-               <a href="#navpanel"   class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext"></a>
-               <div class="ui-btn-right">
-               <a id="notificationLink" class="ui-btn ui-corner-all ui-icon-shop ui-btn-icon-notext"></a>
-               <a  id="searchButton" class="ui-btn ui-corner-all ui-icon-search ui-btn-icon-notext"></a>
-               </div>
-                <div id="nav">
-                    <div id="notificationContainer">
-                        <div id="notificationTitle">Advertisements</div>
-                        <div id="notificationsBody" class="notifications">
-                        </div>
-                        <div id="notificationFooter"><a href="#">See All</a></div>
-                    </div></div>
-                <div id="nav">
-                    <div id="notificationCo">
-                        <div id="notificationsBod" class="notifications">
-                            <input type="text" id="text-field" placeholder="Enter a Location" />
-                        </div>
-                    </div>
-                </div> 
-                </div> 
         <div data-role="content" style="padding: 0;">
             <!--popups -->
             <div data-role="popup" id="popupDialogDireictionMethod2Point" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width: 250px;">
@@ -127,7 +104,15 @@ PageMain
 
                 </div>
             </div>
-      <div id="container" style="position:absolute; width: 100%; height: 100%; padding: 0;">
+             <div class="ui-grid-b"id="pan">
+                <div class="ui-block-a" style="width:3%;background-color:#D8D8D8">
+                    <a href="#navpanel" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext"></a>
+                </div>
+                <div class="ui-block-b" style="width:90%;background-color:#D8D8D8;border-bottom-right-radius:15px;border-top-right-radius: 15px">
+                    <input type="text" id="text-field" placeholder="Enter a Location"/>
+                </div>
+            </div><!-- /grid-b -->  
+              <div id="container" style="position:absolute; width: 100%; height: 100%; padding: 0;">
             </div>
             </div>
 

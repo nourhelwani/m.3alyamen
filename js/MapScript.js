@@ -28,6 +28,8 @@ element:input
            
         }
     }]);
+    //
+     myMap.PushControl(pan, 'top_center');
 
     var searchBox1 = document.getElementById("searchBox1");
     myMap.AutoComplete({
