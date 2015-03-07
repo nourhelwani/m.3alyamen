@@ -1,7 +1,6 @@
 (function (window, Codepros) {
-	
-
-
+ var mark1;
+ var mark2;
  var myMap = Codepros.CreateNew(document.getElementById("container"), {
         center: new google.maps.LatLng(33.51849923765608, 36.287841796875),
         zoom: 13,
@@ -15,7 +14,6 @@
         }]
     });
  	 
-//console.log($('#container').css( "height")); 
     //search
     var input = document.getElementById("text-field");
     //myMap.PushControl(input,'top');
@@ -30,43 +28,28 @@
     //get location btn and push to map
     var btnLocation = document.getElementById("btnLocation");
     myMap.PushControl(btnLocation, 'bottom_right');
-    //event
-    //
-    var mark1;
-    var mark2;
- 
-    //get location btn and push to map
-    var btnLocation = document.getElementById("btnLocation");
-    myMap.PushControl(btnLocation, 'bottom_right');
-    //event
-    btnLocation.onclick = function () {
-    	//alert(window.innerHeight);
-        myMap.MarkCurrentPosition();
+    //events
+        btnLocation.onclick = function () {
+       myMap.MarkCurrentPosition();
 
     }
-    //add events
-    document.getElementById('btnGetDirection').onclick = function () {
-   popupDialogGetDirectionMethod();
-        
-
-    }
-    document.getElementById('btnOk').onclick = function () {
-        $("#popupDialogDireictionError").popup("close")
-    }
-    function popupDialogGetDirectionMethod() {
-        $("#popupDialogGetDirectionMethod").popup("open")
-        var btnGetDirectionMethodTwoPoint = document.getElementById('btnGetDirectionMethodTwoPoint');
-        btnGetDirectionMethodTwoPoint.onclick = function () {
-            $("#popupDialogGetDirectionMethod").popup("close")
-            drowPoint1();
-        }
         var btnGetDirectionMethodTwoSearchBox = document.getElementById('btnGetDirectionMethodTwoSearchBox');
         btnGetDirectionMethodTwoSearchBox.onclick = function () {
             $.mobile.pageContainer.pagecontainer("change", "#PageGetDirection", {
                 transition: "slide"
             });
         }
+    document.getElementById('btn2point').onclick = function () {
+       drowPoint1()
     }
+
+    
+    document.getElementById('btnOk').onclick = function () {
+
+        $("#popupDialogDireictionError").popup("close")
+    }
+    
+    
 
     function openpoPupDialogDireictionMethod2Point() {
     
@@ -102,10 +85,21 @@
                     obj: myMap.gMap,
                     event: 'click',
                     callback: function (e) {
-                        $.mobile.pageContainer.pagecontainer("change", "#pagePanel", {
+                    /*    $.mobile.pageContainer.pagecontainer("change", "#pagePanel", {
                             transition: "slideup"
-                        });
+                        });*/
+                  $("#popupPanel").popup("open",{
+    x: 0,
+    y: 0
+})
+
+  myMap._OnOnce({
+                    obj: myMap.gMap,
+                    event: 'click',
+                    callback: function (e) {
                         clear();
+                   }})
+
                     }
                 });
 
@@ -113,6 +107,7 @@
         });
         myMap.clearMark(mark1);
         myMap.clearMark(mark2);
+
 
     }
     //to drow first point1 and call drowPoont2() 

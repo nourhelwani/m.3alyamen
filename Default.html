@@ -2,8 +2,8 @@
 <head>
     <meta charset="UTF-8" />
     <title>MyMap</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-
+   
+    
     <script src="js/jquery1.10.2.js"></script>
     <script src="js/jqueryui1.11.3.js"></script>
     <script src="http://maps.google.com/maps/api/js?sensor=false&libraries=places,geometry"></script>
@@ -12,7 +12,6 @@
     <script src="js/Codepros.js"></script>
     <script src="js/jqueryui.codepros.js"></script>
     
-    <link href="Style.css" rel="stylesheet" />
     <!-- Include meta tag to ensure prop
     er rendering and touch zooming -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +21,6 @@
     <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
     <!-- Include the jQuery Mobile library -->
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
     <!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
 </head>
 <body>
@@ -32,22 +30,28 @@
 PageMain 
 -->
     <div data-role="page" id="pageMain">
-        <!--left panel-->
-        <div data-role="panel" id="navpanel" data-display="overlay" data-theme="b">
+        <!--nav panel-->
+     
+            <div data-role="panel" data-theme="b" id="navpanel" data-display="overlay">
+<ul data-role="listview" class="ui-listview-outer">
+  <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
+    <h2>Directions</h2>
+    <ul data-role="listview" data-shadow="false" data-inset="true" data-corners="false">
+      <li><a href="" id="btn2point">2 points</a></li>
+      
+      <li><a href="" id="btnGetDirectionMethodTwoSearchBox">search box</a></li>
+    </ul>
+  </li>
+  <li><a href="#">setting</a></li>
+  <li><a href="#">help</a></li>
+  
+</ul>
+</div>
 
-            <ul data-role="listview">
-                <li><a href="#" id="btnGetDirection">Get Directions</a></li>
-                <li><a href="">Settings</a></li>
-                <li><a href="">Help</a></li>
 
-            </ul>
-            <div data-role="main" class="ui-content">
-            </div>
-        </div>
-        <!--header-->
         <div data-role="header" id="header" data-position="fixed" data-fullscreen="true">
                <h1>3alymen</h1>
-               <a href="#navpanel" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext"></a>
+               <a href="#navpanel"   class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext"></a>
                <div class="ui-btn-right">
                <a id="notificationLink" class="ui-btn ui-corner-all ui-icon-shop ui-btn-icon-notext"></a>
                <a  id="searchButton" class="ui-btn ui-corner-all ui-icon-search ui-btn-icon-notext"></a>
@@ -70,6 +74,10 @@ PageMain
         <div data-role="content" style="padding: 0;">
             <!--popups -->
             <div data-role="popup" id="popupDialogDireictionMethod2Point" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width: 250px;">
+
+
+
+
                 <div data-role="header" data-theme="a">
                     <h5>3alymen</h5>
                 </div>
@@ -91,6 +99,12 @@ PageMain
                     <button type="button" id="btnOk" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">ok</button>
                 </div>
             </div>
+            <div data-role="popup" id="popupPanel" data-overlay-theme="b" data-theme="a"  class="ui-content">
+ <div id="directions" style="width:250px">
+ </div>
+    
+ 
+</div>
 
             <div data-role="popup" id="popupDialogGetDirectionMethod" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width: 300px;">
                 <div data-role="header" data-theme="a">
@@ -105,7 +119,7 @@ PageMain
 
                 </div>
             </div>
-      <div id="container">
+      <div id="container" style="position:absolute; width: 100%; height: 100%; padding: 0;">
             </div>
             </div>
 
@@ -119,7 +133,7 @@ panle page
             <h1>Directions</h1>
         </div>
         <div data-role="main" class="ui-content">
-            <div id="directions">
+            <div >
             </div>
             <a href="#" class="ui-btn ui-btn-b" data-rel="back">Map</a>
         </div>
@@ -156,8 +170,10 @@ PageGetDirection
             </button>
         </div>
 
+ <link rel="stylesheet" type="text/css" href="style.css">
      <script src="js/Script.js"></script>
-    <script type="text/javascript" src="js/MapScript.js"></script>
+   <script type="text/javascript" src="js/MapScript.js"></script>
+
     
 </body>
 </html>
