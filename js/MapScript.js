@@ -24,6 +24,24 @@
            
         }
     }]);
+    var searchBox1 = document.getElementById("searchBox1");
+    //myMap.PushControl(input,'top');
+    myMap.AutoComplete(searchBox1);
+    myMap._AttachEvents(myMap.gMap, [{
+        name: 'click',
+        callback: function (e) {
+           
+        }
+    }]);
+    var searchBox2 = document.getElementById("searchBox2");
+    //myMap.PushControl(input,'top');
+    myMap.AutoComplete(searchBox2);
+    myMap._AttachEvents(myMap.gMap, [{
+        name: 'click',
+        callback: function (e) {
+           
+        }
+    }]);
 
     //get location btn and push to map
     var btnLocation = document.getElementById("btnLocation");
@@ -35,7 +53,7 @@
     }
         var btnGetDirectionMethodTwoSearchBox = document.getElementById('btnGetDirectionMethodTwoSearchBox');
         btnGetDirectionMethodTwoSearchBox.onclick = function () {
-            $.mobile.pageContainer.pagecontainer("change", "#PageGetDirection", {
+            $.mobile.pageContainer.pagecontainer("change", "#pageSearchBox", {
                 transition: "slide"
             });
         }
