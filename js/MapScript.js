@@ -86,17 +86,24 @@ element:input
        myMap.MarkCurrentPosition();
 
     }
-    document.getElementById('btnSearchBoxGetDirection').onclick=function(){
+
+    document.getElementById('btnGetDirectionMethodTwoSearchBox1').onclick=function(){
     	//getDirection(travelModes)
         var errorGetDirections=false;
+     var direictionsWay= $('input:radio[name=rad1]:checked').val()
+
+
 
         try{
-            if(document.getElementById('radCar').checked) {
+            if(direictionsWay=='car') {
+
                 getDirection('driving',markerBox1,markerBox2);
-                alert('car');
+                
  }
- else if(document.getElementById('radWalk').checked) {
+ else if(direictionsWay=='walk') {
+    
 getDirection('walking',markerBox1,markerBox2); 
+
 }
 
 }
@@ -119,16 +126,17 @@ $("#popupDialogDireictionErrorSearchBox").popup("open");
 
 
     }
-        var btnGetDirectionMethodTwoSearchBox = document.getElementById('btnGetDirectionMethodTwoSearchBox');
-        btnGetDirectionMethodTwoSearchBox.onclick = function () {
-            $.mobile.pageContainer.pagecontainer("change", "#PageGetDirection", {
-                transition: "slide"
-            });
-        }
+        
     document.getElementById('btn2point').onclick = function () {
         $( "#navpanel" ).panel( "close");
        drowPoint1()
     }
+     var btnGetDirectionMethodTwoSearchBox = document.getElementById('btnGetDirectionMethodTwoSearchBox');
+        btnGetDirectionMethodTwoSearchBox.onclick = function () {
+            $.mobile.pageContainer.pagecontainer("change", "#PageGetDirection", {
+
+            });
+        }
 
     
     document.getElementById('btnOk').onclick = function () {

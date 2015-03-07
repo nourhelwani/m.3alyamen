@@ -159,14 +159,6 @@ PageGetDirection
             <a href="#" class="ui-btn ui-btn-inline ui-icon-back ui-shadow ui-corner-all ui-btn-icon-notext" data-rel="back">Map</a>
         </div>
         <div data-role="main" class="ui-content">
-<form>
-              
-        
-      
-               
-       
-      
-     
           <button type="button" id="btnLocation"  class="ui-btn ui-btn-inline ui-icon-Location ui-shadow ui-corner-all ui-btn-icon-notext"></button>
      <label for="name">Choose starting point</label>
      <input type="text" name="name" id="searchBox1" value="" placeholder="Enter a Location" />
@@ -174,20 +166,22 @@ PageGetDirection
             <label for="name">Choose destinatio point</label>
 
             <input type="text" name="name" id="searchBox2" value="" placeholder="Enter a Location"/>
-            </form>
- <fieldset data-role="controlgroup" data-type="horizontal">
-        <legend>Directions way</legend>
-        <input type="radio" name="radio-choice-h-2" id="radCar" value="on" checked="checked">
-        <label for="radio-choice-h-2a">Car</label>
-        <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
-        <label for="radio-choice-h-2b">Walk</label>
-        <button type="button" id="radWalk" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">
-                Get Direction
-            </button>
-    
-        
-    </fieldset>
             
+ <form>
+    <fieldset data-role="controlgroup" data-theme="b" data-type="horizontal">
+        <legend>derictions way:</legend>
+        <input type="radio" name="rad1" id="radCar" value="car" checked="checked">
+        <label for="radCar">Car</label>
+        <input type="radio" name="rad1" id="radWalk" value="walk">
+        <label for="radWalk">Walk</label>
+       
+         <button type="button" id="btnGetDirectionMethodTwoSearchBox1" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a">
+                Get Direction
+            </button>    
+       
+    </fieldset>
+</form>
+        </div>
         </div>
 
  <link rel="stylesheet" type="text/css" href="style.css">
