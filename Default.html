@@ -73,7 +73,7 @@ PageMain
                 </div> 
         <div data-role="content" style="padding: 0;">
             <!--popups -->
-            <div data-role="popup" id="popupDialogDireictionMethod2Point" data-overlay-theme="b" data-theme="b" data-dismissible="true" style="max-width: 250px;">
+            <div data-role="popup" id="popupDialogDireictionMethod2Point" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width: 250px;">
 
 
 
@@ -106,17 +106,18 @@ PageMain
  
 </div>
 
-
-
-
             <div data-role="popup" id="popupDialogGetDirectionMethod" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width: 300px;">
+                <div data-role="header" data-theme="a">
+                    <h5>3alymen</h5>
+                </div>
+                <div role="main" class="ui-content">
                     <p>please choose the direction method</p>
                     <button type="button" id="btnGetDirectionMethodTwoPoint" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">2 Points</button>
                     <button type="button" id="btnGetDirectionMethodTwoSearchBox" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">
                         Search box
                     </button>
 
-                
+                </div>
             </div>
       <div id="container" style="position:absolute; width: 100%; height: 100%; padding: 0;">
             </div>
@@ -124,30 +125,51 @@ PageMain
 
 
     </div>
-    
-    <div data-role="page" id="pageSearchBox" >
-  
+    <!--
+panle page 
+-->
+    <div data-role="page" id="pagePanel">
+        <div data-role="header">
+            <h1>Directions</h1>
+        </div>
+        <div data-role="main" class="ui-content">
+            <div >
+            </div>
+            <a href="#" class="ui-btn ui-btn-b" data-rel="back">Map</a>
+        </div>
+        <div data-role="footer">
+        </div>
+    </div>
+    <!--
+PageGetDirection 
+-->
+    <div data-role="page" id="PageGetDirection">
         <div data-role="header">
             <h1>Directions</h1>
             <a href="#" class="ui-btn ui-btn-inline ui-icon-back ui-shadow ui-corner-all ui-btn-icon-notext" data-rel="back">Map</a>
         </div>
-        <div>
-    
-<form action="form.php" method="post">
-              <button type="button" id="btnLocation"  class="ui-btn ui-btn-inline ui-icon-Location ui-shadow ui-corner-all ui-btn-icon-notext "></button>
-
+        <div data-role="main" class="ui-content">
          <label for="name">Choose starting point</label>
-            <input type="text"  id="searchBox1" placeholder="Enter a Location" />   
-          
+           
+     <div class="ui-grid-a">
+          <div class="ui-block-a">
+            <input type="text" name="name" id="name" value="" placeholder="Enter a Location" />   
+          </div>
+          <div class="ui-block-b">
+            
+              <button type="button" id="btnLocation"  class="ui-btn ui-btn-inline ui-icon-Location ui-shadow ui-corner-all ui-btn-icon-notext "></button>
+          </div>
+    </div>
+            
             <label for="name">Choose destinatio point</label>
-            <input type="text"  id="searchBox2" value="" placeholder="Enter a Location"/>
-            </form>
+
+            <input type="text" name="name" id="name" value="" placeholder="Enter a Location"/>
+
+            <button type="button" id="btnSearchBoxGetDirection" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">
+                Get Direction
+            </button>
         </div>
-        </div>
 
-
-
-      
  <link rel="stylesheet" type="text/css" href="style.css">
      <script src="js/Script.js"></script>
    <script type="text/javascript" src="js/MapScript.js"></script>
