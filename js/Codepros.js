@@ -304,8 +304,10 @@
                         marker.setVisible(false);
                         var place = autoComplete.getPlace();
                         console.log(place);
+                  
                         if(!place.geometry){
                             console.log("Not Found in Places..");
+                         options.error.call(self,"true");
                             return;
                         }
                         if(place.geometry.viewport){
@@ -323,7 +325,7 @@
                         }));
 
                         marker.setPosition(place.geometry.location);
-                        options.position.call(self,place.geometry.location)
+                        options.position.call(self,place.geometry.location);
                         marker.setVisible(true);
 
                         console.dir(place);
