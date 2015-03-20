@@ -22,9 +22,31 @@
     <!-- Include the jQuery Mobile library -->
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
+    <script type="text/javascript">
+    function clickpostCodeRecivedButton(lat,lng,userName){
+
+document.getElementById('hiddenLatLng').value=lat+" "+lng;
+document.getElementById('hiddenUserName').value=userName;
+document.getElementById('btncallpostCodeRecived').click();
+    }
+
+function clickpostCodeRecivedRequsetButton(userName,phoneNumber){
+document.getElementById('hiddenUserName').value=userName;
+document.getElementById('hiddenPhoneNumber').value=phoneNumber;
+document.getElementById('btncallpostCodeRequsetRecived').click();
+
+}
+
+
+    </script>
+
 </head>
 <body>
-
+<input type="hidden" id="hiddenPhoneNumber">
+<input type="hidden" id="hiddenLatLng">
+<input type="hidden" id="hiddenUserName">
+<button type="button" id="btncallpostCodeRecived"></button>
+<button type="button" id="btncallpostCodeRequsetRecived"></button>
     <button type="button" id="btnLocation" data-inline="true" class="ui-btn ui-icon-Location ui-shadow ui-corner-all ui-btn-icon-notext ">get location</button>
     <!--
 PageMain 
@@ -44,11 +66,33 @@ panel
                         <li><a href="#" id="btnGetDirectionMethodTwoSearchBox">search box</a></li>
                     </ul>
                 </li>
-                <li><a href="#">setting</a></li>
+                <li><a href="#" id="PostCode">Post Code</a></li>
                 <li><a href="#">help</a></li>
 
             </ul>
         </div>
+        
+        <div data-role="popup" id="popupPostCode"  data-theme="a" data-overlay-theme="b" data-dismissible="true" >
+                <div data-role="header" data-theme="a">
+                    <h5>3alymen</h5>
+                </div>
+                <div role="main" class="ui-content">
+  <p>your name :</p>
+  <input type="text" name="userName" id="txtUserName">
+                    <p>phone number:</p>          
+  <input type="text" name="phoneNum" id="txtPhoneNumber">
+                  <fieldset data-role="controlgroup" data-theme="a" data-type="vertical">
+                 
+                    <input type="radio" name="rad2" id="radRes" value="RES" checked="checked">
+                    <label for="radRes">Send my post code</label>
+                    <input type="radio" name="rad2" id="radReq" value="REQ">
+                    <label for="radReq">Send Post code requst</label>
+          </fieldset>
+  <input type="button" value="Send sms" id="btnSendPostCode">
+
+                
+                </div>
+            </div>
         <div data-role="content" style="padding: 0;">
             <!--popups -->
             <div data-role="popup" id="popupDialogDireictionMethod2Point" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width: 250px;">
@@ -63,16 +107,39 @@ panel
                 </div>
             </div>
 
-            <div data-role="popup" id="popupText" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width: 300px;">
+            <div data-role="popup" id="popupText" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:300px;">
                 <div data-role="header" data-theme="a">
                     <h5>3alymen</h5>
                 </div>
 
                 <div role="main" class="ui-content">
-                    <p id="content"></p>
+                    <p id="popupTextContent"></p>
                     <button type="button" id="btnOk" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">ok</button>
                 </div>
             </div>
+
+            <div data-role="popup" id="popupConfirm" data-overlay-theme="b" data-theme="b" data-dismissible="true" style="max-width:300px;">
+                <div data-role="header" data-theme="a">
+                    <h5>3alymen</h5>
+                </div>
+                <div role="main" class="ui-content">
+                    <p id="popupConfirmContent"></p>
+                    <button type="button" id="btnPostYes" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">Yes</button>
+                    <button type="button" id="btnPostNo" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">No</button>
+                </div>
+            </div>
+            <div data-role="popup" id="popupConfirmRequst" data-overlay-theme="b" data-theme="b" data-dismissible="true" style="max-width:300px;">
+                <div data-role="header" data-theme="a">
+                    <h5>3alymen</h5>
+                </div>
+                <div role="main" class="ui-content">
+                    <p id="popupConfirmRequstContent"></p>
+                    <button type="button" id="btnPostRequsetYes" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">Yes</button>
+                    <button type="button" id="btnPostRequsetNo" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">No</button>
+                </div>
+            </div>
+
+
 
             <!--search div -->
 
@@ -84,7 +151,7 @@ panel
                     <input type="text" id="text-field" placeholder="Enter a Location" />
                 </div>
             </div>
-            <!-- /grid-b -->
+            <!-- /grid-b --> 
             <div id="container">
             </div>
         </div>

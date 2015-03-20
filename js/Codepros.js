@@ -5,6 +5,7 @@
         function Codepros( element,mapOption ){
             this.gMap = new google.maps.Map(element,mapOption);
             this.markers=list.Create();
+            
             this.directionsDisplay = new google.maps.DirectionsRenderer()
             //Remember To Provide a Style for a Cluterer
             //Cuz it Needs a VPN Connection to get the default.
@@ -270,11 +271,7 @@
                     var objPosition = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
                     this.Center(objPosition);
                     this.Zoom(16);
-                    //Cannot use CreateMarker Cuz it's Adding the marker to the List
-                    //this.CreateMarker({
-                    //  lat:objPosition.lat(),
-                    //  lng:objPosition.lng()
-                    //});
+ 
                     var marker = new google.maps.Marker({
                         position:{
                             lat:objPosition.lat(),
