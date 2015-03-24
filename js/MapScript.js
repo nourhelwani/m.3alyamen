@@ -7,9 +7,10 @@
     var markerpost1;
     var markerpost2;
      var myLocation;
+     var gpsMarker;
     var h = window.innerHeight;
     //custmize the size 
-    document.getElementById('container').style.height = h;
+    document.getElementById('container').style.height = 501;
     //map option
     var myMap = Codepros.CreateNew(document.getElementById("container"), {
         center: new google.maps.LatLng(33.51849923765608, 36.287841796875),
@@ -51,11 +52,13 @@
    var ua = navigator.userAgent.toLowerCase();
    var isAndroid = ua.indexOf("android") > -1; 
    if(isAndroid) {
+    clearAllMarkes();
+  Android.showMsgActivity();
    var location= Android.getLocationByGps(" ");
        if (location) {
         var res = location.split(" ");
         var myLatlng = new google.maps.LatLng(res[0],res[1]);
-         var marker = new google.maps.Marker({
+         gpsMarker= new google.maps.Marker({
       position: myLatlng,
       map: myMap.gMap,
       title: 'my location'
@@ -465,6 +468,9 @@ if (markerpost1) {
 if (markerpost2) {
 
 	myMap.clearMark(markerpost2);
+}
+if(gpsMarker){
+    myMap.clearMark(gpsMarker);
 }
 
 }
