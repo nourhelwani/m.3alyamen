@@ -1,16 +1,22 @@
 (function (window, Codepros) {
-    //vars
+    //varablie
+     var ua = navigator.userAgent.toLowerCase();
+     var android = ua.indexOf("android") > -1; 
     var markerPoint1;
     var markerPoint2;
     var markerBox1;
     var markerBox2;
     var markerpost1;
     var markerpost2;
-     var myLocation;
-     var gpsMarker;
+    var myLocationMarker;
+    var myLocation;
+    var MarkerPurpleModel="http://labs.google.com/ridefinder/images/mm_20_purple.png";
+    var MarkerYellowModel="http://labs.google.com/ridefinder/images/mm_20_yellow.png"; 
+    var MarkerBlueModel="http://labs.google.com/ridefinder/images/mm_20_blue.png";
+    var searchBoxLocationCliked=false;
     var h = window.innerHeight;
     //custmize the size 
-    document.getElementById('container').style.height = 501;
+    document.getElementById('container').style.height = h;
     //map option
     var myMap = Codepros.CreateNew(document.getElementById("container"), {
         center: new google.maps.LatLng(33.51849923765608, 36.287841796875),
@@ -30,62 +36,88 @@
             ]
         }]
     });
-
     //main search box
     var input = document.getElementById("text-field");
     //add auto compulte to main saerch
     myMap.AutoComplete({
         element: input,
         position: function (pos) {
+            input.placeholder=input.value;
+            input.value="";
+            initializeVariable();
+            clearListnerClick();
+            clearAllMarkes();
+    
 
         },
         error: function (error) {
             document.getElementById('popupTextContent').innerHTML = "sorry place not found";
             $("#popupText").popup("open");
+            input.value="";
+            input.placeholder="Enter a Location";
 
+        },showMarker:true
 
-        }
     });
 //btn get loaction
     var btnLocation = document.getElementById("btnLocation");
     btnLocation.onclick = function () {
-   var ua = navigator.userAgent.toLowerCase();
-   var isAndroid = ua.indexOf("android") > -1; 
-   if(isAndroid) {
+    initializeVariable();
+    clearListnerClick();
     clearAllMarkes();
-  Android.showMsgActivity();
-   var location= Android.getLocationByGps(" ");
-       if (location) {
-        var res = location.split(" ");
-        var myLatlng = new google.maps.LatLng(res[0],res[1]);
-         gpsMarker= new google.maps.Marker({
-      position: myLatlng,
+    getMyLocation();
+    myLocationMarker = new google.maps.Marker({
+      position: myLocation,
       map: myMap.gMap,
-      title: 'my location'
+      icon:MarkerPurpleModel,
+    animation:google.maps.Animation.BOUNCE
   });
-         myMap.Center(myLatlng);
-         myMap.Zoom(16);
-        
-     }
-//if fail in get location by gps 
-else{
-    markCurebtLocation();
-    }
-
-
-  
-}
-//if not android 
-else{
-    markCurebtLocation();
-}
-
-
+      myMap.Center(myLocation);
+      myMap.Zoom(15);
     }
     // push controls
     myMap.PushControl(btnLocation, 'bottom_right');
     myMap.PushControl(pan, 'top_center');
+//btngetlocation2searchBox
+document.getElementById('btnLocation1').onclick=function(){
+    if (searchBoxLocationCliked==false) {        
+    getMyLocation();
+    searchBoxLocationCliked=true;
+    document.getElementById('searchBox1').value="My Location";
+    document.getElementById('searchBox1').disabled="disabled";
+}
+else{
 
+    document.getElementById('searchBox1').value="";
+    document.getElementById('searchBox1').placeholder="Enter a Location";
+    document.getElementById('searchBox1').disabled=false;
+    searchBoxLocationCliked=false;
+ 
+}   
+
+}
+function getMyLocation(){
+if (android==true){
+     var location= Android.getLocationByGps("");
+      if (location) {
+       var res = location.split(" "); 
+         myLocation = new google.maps.LatLng(res[0],res[1]);}
+  else{
+ myMap.GetCurrentPosition(function(position){
+                    var myLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+                   
+                })
+    
+  }
+}
+else{
+ myMap.GetCurrentPosition(function(position){
+                     myLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+
+                })    
+  }
+}
+getMyLocation();
 //post Code !!
     document.getElementById('btncallpostCodeRequsetRecived').onclick=function(){
     	clearAllMarkes();
@@ -98,6 +130,7 @@ else{
        document.getElementById("btnPostRequsetNo").onclick=function(){
         $("#popupConfirmRequst").popup("close");
     }
+
    document.getElementById("btnPostRequsetYes").onclick=function(){
    $("#popupConfirmRequst").popup("close");
      var location= Android.getLocationByGps("");
@@ -110,8 +143,7 @@ else{
             document.getElementById('popupTextContent').innerHTML = "can't find your location check gps setting";
             $("#popupText").popup("open");
 
-            }  
-     
+            }     
 
     	 }
     	
@@ -131,13 +163,11 @@ else{
     document.getElementById("btnPostYes").onclick=function(){
   $("#popupConfirm").popup("close"); 
   	
-   var location= Android.getLocationByGps(" ");
-       if (location&&postCodeLatLng) {
-
-         var myLocationRes = location.split(" ");
-         var myLocationLatlng = new google.maps.LatLng(myLocationRes[0],myLocationRes[1]);
+        getMyLocation();
+       if (myLocation&&postCodeLatLng) {
         markerpost1 = new google.maps.Marker({
-      position: myLocationLatlng,
+      position: myLocation,
+      icone:MarkerPurpleModel,
       map: myMap.gMap,
       title: 'my location'
   });
@@ -146,6 +176,7 @@ else{
          markerpost2 = new google.maps.Marker({
       position: PostCodeLatlng,
       map: myMap.gMap,
+      icone:MarkerPurpleModel,
       title: 'friend location'
   });
         
@@ -165,18 +196,16 @@ else{
     }
  
     document.getElementById("btnSendPostCode").onclick=function(){
-    	clearAllMarkes();
-    	initializeVariable();	
+
     		var PhoneNumber=document.getElementById('txtPhoneNumber').value;
             var userName=document.getElementById('txtUserName').value;
     	 var postCodeMode = $('input:radio[name=rad2]:checked').val();
     	 if (postCodeMode=="RES") {
     	 	
     	 
-     var location= Android.getLocationByGps("");
-      if (location) {
-       var res = location.split(" "); 
-        Android.PostCode(res[0],res[1],PhoneNumber,userName,"RES");
+    getMyLocation();
+      if (myLocation) {
+        Android.PostCode(myLocation.lat(),myLocation.lng(),PhoneNumber,userName,"RES");
          $("#popupPostCode").popup("close");
 
       }
@@ -198,6 +227,7 @@ else{
        
 
 document.getElementById("PostCode").onclick=function(){
+    initializeVariable();
 	clearAllMarkes();
 	clearListnerClick();
     $("#navpanel").panel("close");
@@ -241,9 +271,7 @@ document.getElementById("PostCode").onclick=function(){
     myMap.AutoComplete({
         element: searchBox2,
         position: function (pos) {
-
             markerBox2 = new google.maps.Marker({
-
                 position: {
                     lat: pos.lat(),
                     lng: pos.lng()
@@ -257,22 +285,41 @@ document.getElementById("PostCode").onclick=function(){
 
     document.getElementById('btnGetDirectionMethodTwoSearchBox1').onclick = function () {
         //getDirection(travelModes)
+   if (searchBoxLocationCliked==true) {
+    if (myLocation) {
+            markerBox1 = new google.maps.Marker({
+                position: {
+                    lat: myLocation.lat(),
+                    lng: myLocation.lng()
+                }
+
+                    ,
+                map: null
+            })
+}
+else{
+
+            document.getElementById('content2').innerHTML= "can't get current location check gps setting";
+            $("#popupText2").popup("open");
+            document.getElementById("btnOkSearchBox2").onclick=function(){
+            $("#popupText2").popup("close");
+                }
+}}
+
         var errorGetDirections = false;
         var direictionsWay = $('input:radio[name=rad1]:checked').val()
         try {
             if (direictionsWay == 'car') {
 
                 getDirection('driving', markerBox1, markerBox2);
-                clearAllMarkes();
-
+        
             }
             else if (direictionsWay == 'walk') {
             	
-
                 getDirection('walking', markerBox1, markerBox2);
-                clearAllMarkes();
-
+        
             }
+            clearAllMarkes();
 
         }
         catch (error) {
@@ -289,6 +336,13 @@ document.getElementById("PostCode").onclick=function(){
             document.getElementById('content1').innerHTML = "direction not avaliable";
             $("#popupText1").popup("open");
         }
+       var searchBox1= document.getElementById('searchBox1');
+       searchBox1.value="";
+       searchBoxLocationCliked=false;
+       searchBox1.disabled=false;
+        document.getElementById('searchBox2').value="";
+
+
 
     }
 
@@ -305,7 +359,6 @@ document.getElementById("PostCode").onclick=function(){
     	initializeVariable();
     	clearListnerClick();
         
-       
         $.mobile.pageContainer.pagecontainer("change", "#PageGetDirection", {
 
         });
@@ -381,7 +434,9 @@ document.getElementById("PostCode").onclick=function(){
                         lat: e.latLng.lat(),
                         lng: e.latLng.lng(),
                     },
-                    map: this.gMap
+                    map: this.gMap,
+                     animation: google.maps.Animation.DROP,
+                    "icon": MarkerBlueModel,
                 })
                 //call drowPoint2()
 
@@ -403,37 +458,19 @@ document.getElementById("PostCode").onclick=function(){
                         lat: e.latLng.lat(),
                         lng: e.latLng.lng(),
                     },
-                    map: this.gMap
+                    map: this.gMap,
+                    icon:MarkerBlueModel,
+                    animation:google.maps.Animation.DROP
                 })
                 $("#popupDialogDireictionMethod2Point").popup("open")
                 
-               
-
-
             }
         }
 
 	);
     }
+    
 
-function markCurebtLocation(){
-	myMap.GetCurrentPosition(function(position){
- if (myLocation) {
- 	myMap.clearMark(myLocation);
- };                  
-                    var objPosition = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-                    this.Center(objPosition);
-                    this.Zoom(16);
- 
-                    myLocation = new google.maps.Marker({
-                        position:{
-                            lat:objPosition.lat(),
-                            lng:objPosition.lng()
-                        },
-                        map:this.gMap
-                    });
-                })
-            }
 
    
     function initializeVariable(){
@@ -445,8 +482,7 @@ function markCurebtLocation(){
      markerpost1=null;
      markerpost2=null;
     }
-    function clearAllMarkes(){
-  
+    function clearAllMarkes(){ 
 if (markerPoint1) {
 
 	myMap.clearMark(markerPoint1);
@@ -455,8 +491,6 @@ if (markerPoint2) {
 
 	myMap.clearMark(markerPoint2);
 }
-
-
 if (markerBox1) {
 	myMap.clearMark(markerBox1);}
 if (markerBox2) {
@@ -469,10 +503,9 @@ if (markerpost2) {
 
 	myMap.clearMark(markerpost2);
 }
-if(gpsMarker){
-    myMap.clearMark(gpsMarker);
+if(myLocationMarker){
+    myMap.clearMark(myLocationMarker);
 }
-
 }
 function clearListnerClick(){
 	google.maps.event.clearListeners(myMap.gMap, 'click');

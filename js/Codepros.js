@@ -282,6 +282,7 @@
                 })
             },
             AutoComplete:function( options ){
+
                 var self = this;
                 var autoComplete = new google.maps.places.Autocomplete(options.element,{
                     componentRestrictions: {country: 'sy'}
@@ -320,10 +321,12 @@
                             anchor:new google.maps.Point(17,34),
                             scaledSize:new google.maps.Size(35,35)
                         }));
-
-                        marker.setPosition(place.geometry.location);
+                         marker.setPosition(place.geometry.location);
                         options.position.call(self,place.geometry.location);
+             if (options.showMarker) {
+
                         marker.setVisible(true);
+                    }
 
                         console.dir(place);
                         var address = '';
@@ -335,10 +338,13 @@
                             ].join(' ');
                         }
                         infoWindow.setContent("<div><strong>"+place.name+"</strong></div>"+address);
+                        if (options.showMarker) {
                         infoWindow.open(self.gMap,marker);
+                    }
                     }   
                 });
             },
+
             PushControl:function( element,position ){   
                 switch(position){
                     case 'top_center':
